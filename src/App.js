@@ -6,6 +6,7 @@ class App extends Component {
   render() {
 
     return (
+      // <BrowserRouter basename='/my-app'> if base URL is different
       <BrowserRouter>
         <div className="App">
           <Blog />
