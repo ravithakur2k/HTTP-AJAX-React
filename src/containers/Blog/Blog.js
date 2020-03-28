@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 
 import Post from '../../components/Post/Post';
 import './Blog.css';
@@ -12,6 +12,8 @@ import asyncComponent from '../../hoc/asyncComponent';
 const AsyncNewPost = asyncComponent(() => {
     return import('./NewPost/NewPost');
 });
+
+// const NewPosts = React.lazy(() => import('./NewPost/NewPost'));
 
 class Blog extends Component {
 
@@ -44,6 +46,10 @@ class Blog extends Component {
                 {/* <Route path="/" exact render={() => <h1>Home</h1>}/> */}
                 <Switch>
                     {this.state.auth ? <Route path="/new-post" component={AsyncNewPost}/> : null }
+                    {/* {this.state.auth ? <Route path="/new-post" render={() => {
+                        <Suspense fallback={<div>Loading...</div>}><NewPosts /></Suspense>
+                    }} /> : null} */}
+
                     <Route path="/posts" component={Posts} />
                     {/* <Redirect from = "/" to ="posts" /> */}
                     <Route render={() => <h1>NOT FOUND</h1>} />
